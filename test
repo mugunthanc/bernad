@@ -14,7 +14,7 @@ spec:
         app: db2
     spec:
       containers:
-        - name: db2
+        - name: mysql
           image: ibmcom/db2:11.5.7.0  # Or latest official image
           ports:
             - containerPort: 50000
