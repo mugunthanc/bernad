@@ -18,7 +18,7 @@ spec:
           image: ibmcom/db2:11.5.7.0  # Or latest official image
           ports:
             - containerPort: 50000
-              name: db2
+              name: mysql
           env:
             - name: DB2INST1_PASSWORD
               value: mysecretpassword
