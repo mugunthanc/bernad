@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db2
+spec:
+  serviceName: db2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db2
+  template:
+    metadata:
+      labels:
+        app: db2
+    spec:
+      containers:
+        - name: db2
+          image: ibmcom/db2:11.5.7.0  # Or latest official image
+          ports:
+            - containerPort: 50000
+              name: db2
+          env:
+            - name: DB2INST1_PASSWORD
+              value: mysecretpassword
+            - name: LICENSE
+              value: accept
+          volumeMounts:
+            - name: db2-storage
+              mountPath: /database
+  volumeClaimTemplates:
+    - metadata:
+        name: db2-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard
+
